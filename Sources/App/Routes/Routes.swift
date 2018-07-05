@@ -1,4 +1,5 @@
 import Vapor
+import Foundation
 
 extension Droplet {
     func setupRoutes() throws {
@@ -8,8 +9,12 @@ extension Droplet {
             return json
         }
 
-        get("plaintext") { req in
-            return "Hello, world!"
+        get("foundation") { req in
+
+            try autoreleasepool() {
+                let _ = try self.client.get("http://ipv4.download.thinkbroadband.com/50MB.zip")
+            }
+            return "Foundation!"
         }
 
         // response to requests to /info domain
